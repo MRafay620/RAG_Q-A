@@ -61,7 +61,7 @@ python main.py query --question "What was Dr. X researching?"
 Translate a document from one language to another:
 
 ```bash
-python main.py translate --file Files\Ocean_ecogeochemistry_A_review.pdf --source "Spanish" --target "English" --model "llama3.2:latest"
+python main.py translate --file Files\Ocean_ecogeochemistry_A_review.pdf --source "English" --target "German" --model "llama3.2:latest"
 ```
 
 ### Summarize Documents
