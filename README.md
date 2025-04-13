@@ -163,6 +163,17 @@ vs
 
 The charts above demonstrate the relative performance characteristics of each model. For detailed analysis of these results, please refer to the [evaluation section](#evaluation).
 
+# App Result:
+
+![Image](https://github.com/user-attachments/assets/3a2015f8-2c24-4f77-854b-8d55a7fa1322)
+![Image](https://github.com/user-attachments/assets/a4d8cdeb-ea1f-4cbf-902b-5e1991d0da13)
+![Image](https://github.com/user-attachments/assets/d10e544e-e6e2-4228-bd81-9aa9393e47d2)
+![Image](https://github.com/user-attachments/assets/2eec8989-f437-46b1-8186-528d1df95340)
+![Image](https://github.com/user-attachments/assets/ee5460ad-6cb7-4d70-a4c2-26026ebd08f2)
+![Image](https://github.com/user-attachments/assets/a27adf47-a8e7-4f47-8db6-0b6471f423a1)
+![Image](https://github.com/user-attachments/assets/54fa3bd2-50df-4658-92a5-f23e8dde4230)
+![Image](https://github.com/user-attachments/assets/7a4ca0ec-0535-4e84-b822-f11416178ec3)
+
 ## Limitations
 
 - Requires Ollama to be installed and configured on the local machine
