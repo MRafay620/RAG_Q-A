@@ -12,31 +12,6 @@ This repository contains the implementation of an NLP-based system to analyze Dr
 - **Summarization**: Generate concise summaries of publications with ROUGE evaluation
 - **Performance Measurement**: Track tokens per second for all operations
 
-## Translation Model Performance Comparison
-
-We conducted a comparative analysis between two translation models: **llama3.2:latest** and **lauchacarro/qwen2.5-translator:latest**. Here are our findings:
-
-### Performance Characteristics
-
-#### llama3.2:latest
-
-- **Initial Speed**: ~2200 tokens/second
-- **Performance Pattern**: U-shaped curve across operations
-- **Minimum Speed**: ~150 tokens/second at operations 1-2
-- **Final Speed**: ~1250 tokens/second
-- **Operation Range**: Spans from 0 to 3
-
-#### qwen2.5-translator:latest
-
-- **Initial Speed**: ~2000 tokens/second
-- **Performance Pattern**: Linear decline
-- **Final Speed**: ~175 tokens/second
-- **Operation Range**: Limited to 0-1
-
-### Usage Recommendations
-
-- **Use llama3.2:latest when**: Processing longer documents where the recovery phase can offset intermediate slowdowns, or when working with complex translation tasks that benefit from multi-stage processing.
-- **Use qwen2.5-translator:latest when**: Working with shorter documents where the initial high performance is advantageous, or when needing more predictable processing times.
 
 ## Setup and Installation
 
@@ -145,6 +120,33 @@ The system tracks tokens per second for all operations:
 - Summarization
 
 This allows for direct performance comparison and optimization, as demonstrated in our translation model analysis.
+
+## Translation Model Performance Comparison
+
+We conducted a comparative analysis between two translation models: **llama3.2:latest** and **lauchacarro/qwen2.5-translator:latest**. Here are our findings:
+
+### Performance Characteristics
+
+#### llama3.2:latest
+
+- **Initial Speed**: ~2200 tokens/second
+- **Performance Pattern**: U-shaped curve across operations
+- **Minimum Speed**: ~150 tokens/second at operations 1-2
+- **Final Speed**: ~1250 tokens/second
+- **Operation Range**: Spans from 0 to 3
+
+#### qwen2.5-translator:latest
+
+- **Initial Speed**: ~2000 tokens/second
+- **Performance Pattern**: Linear decline
+- **Final Speed**: ~175 tokens/second
+- **Operation Range**: Limited to 0-1
+
+### Usage Recommendations
+
+- **Use llama3.2:latest when**: Processing longer documents where the recovery phase can offset intermediate slowdowns, or when working with complex translation tasks that benefit from multi-stage processing.
+- **Use qwen2.5-translator:latest when**: Working with shorter documents where the initial high performance is advantageous, or when needing more predictable processing times.
+
 
 ## Limitations
 
