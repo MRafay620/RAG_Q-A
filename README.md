@@ -37,6 +37,95 @@ ollama pull nomic-embed-text:latest
 # Optional alternative translation model
 ollama pull lauchacarro/qwen2.5-translator:latest
 ```
+## Docker Setup
+
+This application can be run using Docker, which allows for easier setup and consistent environments across different systems.
+
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+- [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html) (only if using GPU)
+
+### Running with Docker Compose
+
+1. Clone this repository:
+
+```bash
+git clone https://github.com/MRafay620/RAD_Q&A.git
+cd RAD_Q&A
+```
+
+2. Start the application using Docker Compose:
+
+```bash
+docker-compose up -d
+```
+
+This will:
+- Build the Docker image for the main application
+- Pull the Ollama image from Docker Hub
+- Start both containers
+- Connect them in a Docker network
+
+3. Access the application through your web browser at:
+
+```
+http://localhost:8051
+```
+
+### GPU vs CPU Mode
+
+The Docker setup is configured to use GPU if available, otherwise it will fall back to CPU:
+
+- **With GPU**: If you have a compatible NVIDIA GPU and the NVIDIA Container Toolkit installed, Ollama will automatically use your GPU for inference.
+- **Without GPU**: If no GPU is available or the NVIDIA Container Toolkit is not installed, Ollama will run in CPU-only mode.
+
+### Managing Docker Containers
+
+- To stop the application:
+
+```bash
+docker-compose down
+```
+
+- To view logs:
+
+```bash
+# View logs for all containers
+docker-compose logs
+
+# View logs for a specific container
+docker-compose logs ollama
+docker-compose logs main_app
+```
+
+- To rebuild the application image after making changes:
+
+```bash
+docker-compose up -d --build
+```
+
+### Persisting Data
+
+The Ollama models and data are stored in a named volume (`ollama_data`) which persists across container restarts. This means you won't need to re-download models each time you restart the container.
+
+### Troubleshooting
+
+- If you encounter permission issues with GPU access, ensure your user is part of the `docker` group and the NVIDIA Container Toolkit is correctly installed.
+- If the main application cannot connect to Ollama, check that both containers are running:
+  ```bash
+  docker-compose ps
+  ```
+
+### Custom Configuration
+
+You can modify environment variables in the `docker-compose.yml` file to customize the behavior of the application. For example, to use a different port:
+
+```yaml
+ports:
+  - "8080:8051"  # Map port 8080 on host to 8051 in container
+```
 
 ## Usage
 
