@@ -147,6 +147,21 @@ We conducted a comparative analysis between two translation models: **llama3.2:l
 - **Use llama3.2:latest when**: Processing longer documents where the recovery phase can offset intermediate slowdowns, or when working with complex translation tasks that benefit from multi-stage processing.
 - **Use qwen2.5-translator:latest when**: Working with shorter documents where the initial high performance is advantageous, or when needing more predictable processing times.
 
+# Performance Comparison
+
+Below is a performance comparison between two models:
+
+## llama3.2 vs qwen2.5-translator
+
+![llama3.2 performance](https://github.com/user-attachments/assets/0dd64411-11ca-4801-a0f6-e50e85833181)
+*llama3.2:latest*
+
+vs
+
+![qwen2.5-translator performance](https://github.com/user-attachments/assets/c1ef1b69-985c-4818-b5c8-948f0a160c18)
+*qwen2.5-translator:latest*
+
+The charts above demonstrate the relative performance characteristics of each model. For detailed analysis of these results, please refer to the [evaluation section](#evaluation).
 
 ## Limitations
 
