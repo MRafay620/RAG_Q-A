@@ -1,0 +1,29 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: always
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    volumes:
+      - ollama_data:/root/.ollama
+
+  main_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: osos_raffay:latest
+    container_name: main_app
+    ports:
+      - "8051:8051"
+    depends_on:
+      - ollama
+    restart: always
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+  
+volumes:
+  ollama_data:
