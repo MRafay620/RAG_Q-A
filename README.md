@@ -15,29 +15,112 @@ This repository contains the implementation of an NLP-based system to analyze Dr
 
 ## Setup and Installation
 
-1. Clone this repository:
+Choose one of the following options to set up the system.
 
-```bash
-git clone https://github.com/MRafay620/RAD_Q&A.git
-cd code
-```
+### Option 1: Setup and Installation (Using Docker)
 
-2. Install the required dependencies:
+This option uses Docker to ensure a consistent and reproducible environment.
 
-```bash
-pip install -r requirements.txt
-```
+#### System Requirements
+- **Operating System**: Linux (tested on Ubuntu 22.04 or later), macOS, or Windows with WSL2
+- **Optional**: NVIDIA GPU with CUDA support for GPU-accelerated inference
+- **Storage**: At least 10GB of free disk space for models and data
 
-3. Ensure Ollama is installed and running on your system:
 
-```bash
-# Pull the required models
-ollama pull llama3.2:latest
-ollama pull nomic-embed-text:latest
-# Optional alternative translation model
-ollama pull lauchacarro/qwen2.5-translator:latest
-```
+#### Steps
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/MRafay620/RAD_Q&A.git
+   cd RAD_Q&A
+   ```
 
+2. **Review Docker configuration**:
+   - Check the `docker-compose.yml` file to customize port mappings or environment variables if needed.
+
+3. **Build and start containers**:
+   ```bash
+   docker compose up -d
+   ```
+   This will:
+   - Pull the `ollama/ollama:latest` image from Docker Hub.
+   - Build the main application image (`osos_raffay:latest`) using the provided `Dockerfile`.
+   - Start both containers (`ollama` and `main_app`) in a Docker network.
+
+4. **Access the application**:
+   - Open the Streamlit interface in your web browser at:
+     ```
+     http://localhost:8051
+     ```
+
+5. **Verify container status** (optional):
+   ```bash
+   docker compose ps
+   ```
+
+#### Notes
+- **GPU Support**: If an NVIDIA GPU and the NVIDIA Container Toolkit are available, the `ollama` container will use GPU acceleration. Otherwise, it defaults to CPU mode.
+- **Persisting Data**: Models and data are stored in a named volume (`ollama_data`) to persist across container restarts.
+- **Stop Containers**:
+   ```bash
+   docker compose down
+   ```
+- **Troubleshooting**:
+   - If `localhost:8051` is unavailable, modify the port mapping in `docker-compose.yml` (e.g., change to `"8080:8051"`).
+   - Check logs with:
+     ```bash
+     docker compose logs
+     ```
+
+### Option 2: Setup and Installation (Simple, Non-Docker)
+
+This option provides a straightforward setup for running the system directly on your local machine.
+
+#### System Requirements
+- **Operating System**: Linux, macOS, or Windows
+- **Python**: Version 3.8 or higher
+- **Storage**: At least 10GB of free disk space for models and data
+
+#### Prerequisites
+- Python 3.8+ installed
+- [Ollama](https://ollama.ai/) installed and running locally
+
+#### Steps
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/MRafay620/RAD_Q&A.git
+   cd RAD_Q&A/app
+   ```
+
+2. **Create and activate a virtual environment** (optional but recommended):
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Set up Ollama models**:
+   - Ensure Ollama is running on your system.
+   - Pull the required models:
+     ```bash
+     ollama pull llama3.2:latest
+     ollama pull nomic-embed-text:latest
+     # Optional translation model
+     ollama pull lauchacarro/qwen2.5-translator:latest
+     ```
+
+5. **Run the application**:
+   - Start the Streamlit interface:
+     ```bash
+     streamlit run app.py
+     ```
+   - Access it in your web browser at:
+     ```
+     http://localhost:8051
+     ```
 ## Docker Setup
 
 This repository provides Docker support to run Dr. X's Publications Analysis System in a consistent and reproducible environment.
