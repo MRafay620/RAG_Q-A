@@ -21,6 +21,13 @@ Choose one of the following options to set up the system.
 
 This option uses Docker to ensure a consistent and reproducible environment.
 
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+- [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html) (required for GPU support)
+
+
 #### System Requirements
 - **Operating System**: Linux (tested on Ubuntu 22.04 or later), macOS, or Windows with WSL2
 - **Optional**: NVIDIA GPU with CUDA support for GPU-accelerated inference
@@ -121,146 +128,6 @@ This option provides a straightforward setup for running the system directly on 
      ```
      http://localhost:8051
      ```
-## Docker Setup
-
-This repository provides Docker support to run Dr. X's Publications Analysis System in a consistent and reproducible environment.
-
-### System Requirements
-
-The following are the requirements for running this repository using the provided Docker files:
-
-- **Operating System**: Linux (tested on Ubuntu 22.04 or later), macOS, or Windows with WSL2
-- **Optional**: NVIDIA GPU with CUDA support for GPU-accelerated inference (tested on NVIDIA GeForce RTX 3060/3080/3090)
-- **Storage**: At least 10GB of free disk space for models and data
-
-### Prerequisites
-
-- [Docker](https://docs.docker.com/get-docker/)
-- [Docker Compose](https://docs.docker.com/compose/install/)
-- [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html) (required for GPU support)
-
-### Setup
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/MRafay620/RAD_Q&A.git
-cd RAD_Q&A
-```
-
-2. Review the `docker-compose.yml` file to customize configurations if needed, such as changing the port mapping or environment variables.
-
-3. Run the following command to build and start the containers:
-
-```bash
-docker compose up -d
-```
-
-This will:
-- Pull the `ollama/ollama:latest` image from Docker Hub
-- Build the main application image (`osos_raffay:latest`) using the provided `Dockerfile`
-- Start both containers (`ollama` and `main_app`) in a Docker network
-
-4. Access the Streamlit application in your web browser at:
-
-```
-http://localhost:8051
-```
-
-### Usage (from within the main container)
-
-Once the containers are running, you can interact with the system via the Streamlit interface or by executing commands inside the `main_app` container to process documents, query publications, translate files, or generate summaries.
-
-1. **Access the container** (optional, for command-line usage):
-
-```bash
-docker exec -it main_app bash
-```
-
-2. **Process Documents**:
-
-   Process all supported documents in a directory:
-
-   ```bash
-   /app/venv/bin/python main.py process --dir Files
-   ```
-
-3. **Query the System**:
-
-   Ask questions about the processed documents:
-
-   ```bash
-   /app/venv/bin/python main.py query --question "What was Dr. X researching?"
-   ```
-
-4. **Translate Documents**:
-
-   Translate a document to another language:
-
-   ```bash
-   /app/venv/bin/python main.py translate --file Files/Ocean_ecogeochemistry_A_review.pdf --source "English" --target "German" --model "llama3.2:latest"
-   ```
-
-5. **Summarize Documents**:
-
-   Generate a summary of a document:
-
-   ```bash
-   /app/venv/bin/python main.py summarize --file Files/Ocean_ecogeochemistry_A_review.pdf --ratio 0.3
-   ```
-
-### GPU vs CPU Mode
-
-- **With GPU**: If an NVIDIA GPU and the NVIDIA Container Toolkit are available, the `ollama` container will leverage GPU acceleration for faster inference, as specified in the `docker-compose.yml`.
-- **Without GPU**: The system defaults to CPU mode, ensuring compatibility on systems without GPU support.
-
-### Managing Containers
-
-- **Stop the application**:
-
-```bash
-docker compose down
-```
-
-- **View logs**:
-
-```bash
-# View logs for all containers
-docker compose logs
-
-# View logs for a specific container
-docker compose logs ollama
-docker compose logs main_app
-```
-
-- **Rebuild after changes**:
-
-```bash
-docker compose up -d --build
-```
-
-### Persisting Data
-
-Ollama models and data are stored in a named volume (`ollama_data`), which persists across container restarts, eliminating the need to re-download models.
-
-### Troubleshooting
-
-- **GPU Issues**: Ensure your user is part of the `docker` group and the NVIDIA Container Toolkit is installed correctly.
-- **Connection Issues**: Verify both containers are running:
-
-```bash
-docker compose ps
-```
-
-- **Port Conflicts**: If `localhost:8051` is unavailable, modify the port mapping in `docker-compose.yml`, e.g.:
-
-```yaml
-services:
-  main_app:
-    ports:
-      - "8080:8051"  # Map host port 8080 to container port 8051
-```
----
 
 ## Usage
 
